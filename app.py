@@ -13,6 +13,7 @@ import io
 import os
 import re
 import json
+import uvicorn
 import base64
 import tempfile
 import subprocess
@@ -1112,6 +1113,9 @@ async def diagnose(full: bool = Query(False, description="If true, run extended 
     report["elapsed_seconds"] = (datetime.utcnow() - started).total_seconds()
     return report
 
+@app.get("/")
+def read_root():
+    return {"message": "Hello from Railway!"}
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
